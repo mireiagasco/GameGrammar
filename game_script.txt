@@ -1,0 +1,31 @@
+room start {
+    description: "You are in a dimly lit room. There is a door to the north."
+    north: next_room;
+};
+
+room next_room {
+    description: "You have entered the next room. There is a key on the table.";
+    south: start;
+    items: [key];
+};
+
+item key {
+    description: "A shiny golden key.";
+    action:
+    {
+        action: "if";
+        condition: "player.hasItem(\"key\")";
+        block:
+        {
+            print: "You already have the key.";
+        };
+        else:
+        {
+            action: "player.addItem(\"key\")";
+            block:
+            {
+                print: "You picked up the key.";
+            };
+        };
+    };
+};

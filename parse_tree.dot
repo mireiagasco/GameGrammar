@@ -1,0 +1,1 @@
+(gameScript (room room start { description: "You are in a dimly lit room. There is a door to the north." (roomConnection north : next_room ;) }))
