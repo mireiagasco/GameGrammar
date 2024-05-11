@@ -17,6 +17,15 @@ class GameGrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by GameGrammarParser#level.
+    def enterLevel(self, ctx:GameGrammarParser.LevelContext):
+        pass
+
+    # Exit a parse tree produced by GameGrammarParser#level.
+    def exitLevel(self, ctx:GameGrammarParser.LevelContext):
+        pass
+
+
     # Enter a parse tree produced by GameGrammarParser#room.
     def enterRoom(self, ctx:GameGrammarParser.RoomContext):
         pass
@@ -32,6 +41,15 @@ class GameGrammarListener(ParseTreeListener):
 
     # Exit a parse tree produced by GameGrammarParser#roomConnection.
     def exitRoomConnection(self, ctx:GameGrammarParser.RoomConnectionContext):
+        pass
+
+
+    # Enter a parse tree produced by GameGrammarParser#items.
+    def enterItems(self, ctx:GameGrammarParser.ItemsContext):
+        pass
+
+    # Exit a parse tree produced by GameGrammarParser#items.
+    def exitItems(self, ctx:GameGrammarParser.ItemsContext):
         pass
 
 

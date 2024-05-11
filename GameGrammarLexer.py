@@ -7,45 +7,56 @@ import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\24")
-        buf.write("z\b\1\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
-        buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
-        buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
-        buf.write("\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3")
-        buf.write("\3\6\3\66\n\3\r\3\16\3\67\3\3\3\3\3\4\3\4\3\4\3\4\3\4")
-        buf.write("\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3")
-        buf.write("\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\7\tW\n\t\f\t\16\tZ")
-        buf.write("\13\t\3\n\3\n\7\n^\n\n\f\n\16\na\13\n\3\n\3\n\3\13\3\13")
-        buf.write("\3\f\3\f\3\r\3\r\3\16\3\16\3\17\3\17\3\20\3\20\3\21\3")
-        buf.write("\21\3\22\3\22\3\23\3\23\3\23\3\23\3\23\3\23\2\2\24\3\3")
-        buf.write("\5\4\7\5\t\6\13\7\r\b\17\t\21\n\23\13\25\f\27\r\31\16")
-        buf.write("\33\17\35\20\37\21!\22#\23%\24\3\2\6\5\2\13\f\17\17\"")
-        buf.write("\"\5\2C\\aac|\6\2\62;C\\aac|\5\2\f\f\17\17$$\2|\2\3\3")
-        buf.write("\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2")
-        buf.write("\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21\3\2\2\2\2\23\3\2\2\2")
-        buf.write("\2\25\3\2\2\2\2\27\3\2\2\2\2\31\3\2\2\2\2\33\3\2\2\2\2")
-        buf.write("\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2\2\2\2%\3\2")
-        buf.write("\2\2\3\'\3\2\2\2\5\65\3\2\2\2\7;\3\2\2\2\t@\3\2\2\2\13")
-        buf.write("E\3\2\2\2\rL\3\2\2\2\17O\3\2\2\2\21T\3\2\2\2\23[\3\2\2")
-        buf.write("\2\25d\3\2\2\2\27f\3\2\2\2\31h\3\2\2\2\33j\3\2\2\2\35")
-        buf.write("l\3\2\2\2\37n\3\2\2\2!p\3\2\2\2#r\3\2\2\2%t\3\2\2\2\'")
-        buf.write("(\7f\2\2()\7g\2\2)*\7u\2\2*+\7e\2\2+,\7t\2\2,-\7k\2\2")
-        buf.write("-.\7r\2\2./\7v\2\2/\60\7k\2\2\60\61\7q\2\2\61\62\7p\2")
-        buf.write("\2\62\63\7<\2\2\63\4\3\2\2\2\64\66\t\2\2\2\65\64\3\2\2")
-        buf.write("\2\66\67\3\2\2\2\67\65\3\2\2\2\678\3\2\2\289\3\2\2\29")
-        buf.write(":\b\3\2\2:\6\3\2\2\2;<\7t\2\2<=\7q\2\2=>\7q\2\2>?\7o\2")
-        buf.write("\2?\b\3\2\2\2@A\7k\2\2AB\7v\2\2BC\7g\2\2CD\7o\2\2D\n\3")
-        buf.write("\2\2\2EF\7c\2\2FG\7e\2\2GH\7v\2\2HI\7k\2\2IJ\7q\2\2JK")
-        buf.write("\7p\2\2K\f\3\2\2\2LM\7k\2\2MN\7h\2\2N\16\3\2\2\2OP\7g")
-        buf.write("\2\2PQ\7n\2\2QR\7u\2\2RS\7g\2\2S\20\3\2\2\2TX\t\3\2\2")
-        buf.write("UW\t\4\2\2VU\3\2\2\2WZ\3\2\2\2XV\3\2\2\2XY\3\2\2\2Y\22")
-        buf.write("\3\2\2\2ZX\3\2\2\2[_\7$\2\2\\^\n\5\2\2]\\\3\2\2\2^a\3")
-        buf.write("\2\2\2_]\3\2\2\2_`\3\2\2\2`b\3\2\2\2a_\3\2\2\2bc\7$\2")
-        buf.write("\2c\24\3\2\2\2de\7<\2\2e\26\3\2\2\2fg\7.\2\2g\30\3\2\2")
-        buf.write("\2hi\7=\2\2i\32\3\2\2\2jk\7}\2\2k\34\3\2\2\2lm\7\177\2")
-        buf.write("\2m\36\3\2\2\2no\7*\2\2o \3\2\2\2pq\7+\2\2q\"\3\2\2\2")
-        buf.write("rs\7\60\2\2s$\3\2\2\2tu\7r\2\2uv\7t\2\2vw\7k\2\2wx\7p")
-        buf.write("\2\2xy\7v\2\2y&\3\2\2\2\6\2\67X_\3\b\2\2")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\30")
+        buf.write("\u0093\b\1\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7")
+        buf.write("\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r")
+        buf.write("\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23")
+        buf.write("\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\3\2\3\2")
+        buf.write("\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\3\3\3\3")
+        buf.write("\3\3\3\3\3\3\3\3\3\3\4\6\4E\n\4\r\4\16\4F\3\4\3\4\3\5")
+        buf.write("\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3")
+        buf.write("\7\3\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\n\3\n")
+        buf.write("\3\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\f\3\f\7\f")
+        buf.write("r\n\f\f\f\16\fu\13\f\3\r\3\r\7\ry\n\r\f\r\16\r|\13\r\3")
+        buf.write("\r\3\r\3\16\3\16\3\17\3\17\3\20\3\20\3\21\3\21\3\22\3")
+        buf.write("\22\3\23\3\23\3\24\3\24\3\25\3\25\3\26\3\26\3\27\3\27")
+        buf.write("\2\2\30\3\3\5\4\7\5\t\6\13\7\r\b\17\t\21\n\23\13\25\f")
+        buf.write("\27\r\31\16\33\17\35\20\37\21!\22#\23%\24\'\25)\26+\27")
+        buf.write("-\30\3\2\6\5\2\13\f\17\17\"\"\5\2C\\aac|\6\2\62;C\\aa")
+        buf.write("c|\5\2\f\f\17\17$$\2\u0095\2\3\3\2\2\2\2\5\3\2\2\2\2\7")
+        buf.write("\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2")
+        buf.write("\2\2\2\21\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2")
+        buf.write("\2\2\31\3\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2")
+        buf.write("\2!\3\2\2\2\2#\3\2\2\2\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2")
+        buf.write("\2\2+\3\2\2\2\2-\3\2\2\2\3/\3\2\2\2\5<\3\2\2\2\7D\3\2")
+        buf.write("\2\2\tJ\3\2\2\2\13P\3\2\2\2\rU\3\2\2\2\17Z\3\2\2\2\21")
+        buf.write("a\3\2\2\2\23d\3\2\2\2\25i\3\2\2\2\27o\3\2\2\2\31v\3\2")
+        buf.write("\2\2\33\177\3\2\2\2\35\u0081\3\2\2\2\37\u0083\3\2\2\2")
+        buf.write("!\u0085\3\2\2\2#\u0087\3\2\2\2%\u0089\3\2\2\2\'\u008b")
+        buf.write("\3\2\2\2)\u008d\3\2\2\2+\u008f\3\2\2\2-\u0091\3\2\2\2")
+        buf.write("/\60\7f\2\2\60\61\7g\2\2\61\62\7u\2\2\62\63\7e\2\2\63")
+        buf.write("\64\7t\2\2\64\65\7k\2\2\65\66\7r\2\2\66\67\7v\2\2\678")
+        buf.write("\7k\2\289\7q\2\29:\7p\2\2:;\7<\2\2;\4\3\2\2\2<=\7k\2\2")
+        buf.write("=>\7v\2\2>?\7g\2\2?@\7o\2\2@A\7u\2\2AB\7<\2\2B\6\3\2\2")
+        buf.write("\2CE\t\2\2\2DC\3\2\2\2EF\3\2\2\2FD\3\2\2\2FG\3\2\2\2G")
+        buf.write("H\3\2\2\2HI\b\4\2\2I\b\3\2\2\2JK\7n\2\2KL\7g\2\2LM\7x")
+        buf.write("\2\2MN\7g\2\2NO\7n\2\2O\n\3\2\2\2PQ\7t\2\2QR\7q\2\2RS")
+        buf.write("\7q\2\2ST\7o\2\2T\f\3\2\2\2UV\7k\2\2VW\7v\2\2WX\7g\2\2")
+        buf.write("XY\7o\2\2Y\16\3\2\2\2Z[\7c\2\2[\\\7e\2\2\\]\7v\2\2]^\7")
+        buf.write("k\2\2^_\7q\2\2_`\7p\2\2`\20\3\2\2\2ab\7k\2\2bc\7h\2\2")
+        buf.write("c\22\3\2\2\2de\7g\2\2ef\7n\2\2fg\7u\2\2gh\7g\2\2h\24\3")
+        buf.write("\2\2\2ij\7r\2\2jk\7t\2\2kl\7k\2\2lm\7p\2\2mn\7v\2\2n\26")
+        buf.write("\3\2\2\2os\t\3\2\2pr\t\4\2\2qp\3\2\2\2ru\3\2\2\2sq\3\2")
+        buf.write("\2\2st\3\2\2\2t\30\3\2\2\2us\3\2\2\2vz\7$\2\2wy\n\5\2")
+        buf.write("\2xw\3\2\2\2y|\3\2\2\2zx\3\2\2\2z{\3\2\2\2{}\3\2\2\2|")
+        buf.write("z\3\2\2\2}~\7$\2\2~\32\3\2\2\2\177\u0080\7<\2\2\u0080")
+        buf.write("\34\3\2\2\2\u0081\u0082\7.\2\2\u0082\36\3\2\2\2\u0083")
+        buf.write("\u0084\7=\2\2\u0084 \3\2\2\2\u0085\u0086\7}\2\2\u0086")
+        buf.write("\"\3\2\2\2\u0087\u0088\7\177\2\2\u0088$\3\2\2\2\u0089")
+        buf.write("\u008a\7]\2\2\u008a&\3\2\2\2\u008b\u008c\7_\2\2\u008c")
+        buf.write("(\3\2\2\2\u008d\u008e\7*\2\2\u008e*\3\2\2\2\u008f\u0090")
+        buf.write("\7+\2\2\u0090,\3\2\2\2\u0091\u0092\7\60\2\2\u0092.\3\2")
+        buf.write("\2\2\6\2Fsz\3\b\2\2")
         return buf.getvalue()
 
 
@@ -56,41 +67,48 @@ class GameGrammarLexer(Lexer):
     decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
 
     T__0 = 1
-    WS = 2
-    ROOM = 3
-    ITEM = 4
-    ACTION = 5
-    IF = 6
-    ELSE = 7
-    IDENTIFIER = 8
-    STRING_LITERAL = 9
-    COLON = 10
-    COMMA = 11
-    SEMICOLON = 12
-    LEFT_BRACE = 13
-    RIGHT_BRACE = 14
-    LEFT_PAREN = 15
-    RIGHT_PAREN = 16
-    PERIOD = 17
-    PRINT = 18
+    T__1 = 2
+    WS = 3
+    LEVEL = 4
+    ROOM = 5
+    ITEM = 6
+    ACTION = 7
+    IF = 8
+    ELSE = 9
+    PRINT = 10
+    IDENTIFIER = 11
+    STRING_LITERAL = 12
+    COLON = 13
+    COMMA = 14
+    SEMICOLON = 15
+    LEFT_BRACE = 16
+    RIGHT_BRACE = 17
+    LEFT_BRACKET = 18
+    RIGHT_BRACKET = 19
+    LEFT_PAREN = 20
+    RIGHT_PAREN = 21
+    PERIOD = 22
 
     channelNames = [ u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN" ]
 
     modeNames = [ "DEFAULT_MODE" ]
 
     literalNames = [ "<INVALID>",
-            "'description:'", "'room'", "'item'", "'action'", "'if'", "'else'", 
-            "':'", "','", "';'", "'{'", "'}'", "'('", "')'", "'.'", "'print'" ]
+            "'description:'", "'items:'", "'level'", "'room'", "'item'", 
+            "'action'", "'if'", "'else'", "'print'", "':'", "','", "';'", 
+            "'{'", "'}'", "'['", "']'", "'('", "')'", "'.'" ]
 
     symbolicNames = [ "<INVALID>",
-            "WS", "ROOM", "ITEM", "ACTION", "IF", "ELSE", "IDENTIFIER", 
-            "STRING_LITERAL", "COLON", "COMMA", "SEMICOLON", "LEFT_BRACE", 
-            "RIGHT_BRACE", "LEFT_PAREN", "RIGHT_PAREN", "PERIOD", "PRINT" ]
+            "WS", "LEVEL", "ROOM", "ITEM", "ACTION", "IF", "ELSE", "PRINT", 
+            "IDENTIFIER", "STRING_LITERAL", "COLON", "COMMA", "SEMICOLON", 
+            "LEFT_BRACE", "RIGHT_BRACE", "LEFT_BRACKET", "RIGHT_BRACKET", 
+            "LEFT_PAREN", "RIGHT_PAREN", "PERIOD" ]
 
-    ruleNames = [ "T__0", "WS", "ROOM", "ITEM", "ACTION", "IF", "ELSE", 
-                  "IDENTIFIER", "STRING_LITERAL", "COLON", "COMMA", "SEMICOLON", 
-                  "LEFT_BRACE", "RIGHT_BRACE", "LEFT_PAREN", "RIGHT_PAREN", 
-                  "PERIOD", "PRINT" ]
+    ruleNames = [ "T__0", "T__1", "WS", "LEVEL", "ROOM", "ITEM", "ACTION", 
+                  "IF", "ELSE", "PRINT", "IDENTIFIER", "STRING_LITERAL", 
+                  "COLON", "COMMA", "SEMICOLON", "LEFT_BRACE", "RIGHT_BRACE", 
+                  "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_PAREN", "RIGHT_PAREN", 
+                  "PERIOD" ]
 
     grammarFileName = "GameGrammar.g4"
 

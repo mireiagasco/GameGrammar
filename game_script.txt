@@ -1,31 +1,94 @@
-room start {
-    description: "You are in a dimly lit room. There is a door to the north."
-    north: next_room;
-};
+level start_level {
 
-room next_room {
-    description: "You have entered the next room. There is a key on the table.";
-    south: start;
-    items: [key];
-};
+    item torch {
 
-item key {
-    description: "A shiny golden key.";
-    action:
-    {
-        action: "if";
-        condition: "player.hasItem(\"key\")";
-        block:
-        {
-            print: "You already have the key.";
-        };
-        else:
-        {
-            action: "player.addItem(\"key\")";
-            block:
+        description: "An old torch. It emits a faint light."
+        action pickup {
+            if ("player.hasItem(torch)")
             {
-                print: "You picked up the key.";
-            };
-        };
-    };
-};
+                print: "You already have a torch.";
+            }
+            else {
+                action addItem {
+                    print: "You picked up the torch.";
+                }
+            }
+        }
+    }
+
+
+    item book {
+        description: "A dusty old book."
+        action pickup {
+            if ("player.hasItem(book)")
+            {
+                print: "You already have a book.";
+            }
+            else {
+                action addItem {
+                    print: "You picked up the book.";
+                }
+            }
+        }
+    }
+
+    item flower {
+        description: "A beautiful flower."
+        action pickup {
+            if ("player.hasItem(flower)")
+            {
+                print: "You already have a flower.";
+            }
+            else {
+                action addItem {
+                    print: "You picked up the flower.";
+                }
+            }
+        }
+    }
+
+    item old_box {
+        description: "An old wooden box covered in dust."
+        action pickup {
+            if ("player.hasItem(old_box)")
+            {
+                print: "You already have an old box.";
+            }
+            else {
+                action addItem {
+                    print: "You picked up the old box.";
+                }
+            }
+        }
+    }
+
+    room start_room {
+        description: "You are in a dimly lit room. There is a door to the north."
+        north: hallway;
+    }
+
+    room hallway {
+        description: "You are in a narrow hallway."
+        west: start_room;
+        east: library;
+        items: [torch]
+    }
+
+    room library {
+        description: "You have entered the library."
+        west: hallway;
+        items: [book]
+    }
+
+    room garden {
+        description: "You find yourself in a peaceful garden."
+        south: hallway;
+        items: [flower]
+    }
+
+    room attic {
+        description: "You climb up to the attic. It's dusty and full of cobwebs."
+        down: hallway;
+        items: [old_box]
+    }
+}
