@@ -24,13 +24,14 @@ PERIOD          : '.';
 
 // Parser rules
 gameScript      : level;
-level           : LEVEL IDENTIFIER LEFT_BRACE (room | item)* RIGHT_BRACE;
-room            : ROOM IDENTIFIER LEFT_BRACE 'description:' STRING_LITERAL (roomConnection)* (items)? RIGHT_BRACE;
+level           : LEVEL IDENTIFIER LEFT_BRACE (room | item | action)* RIGHT_BRACE;
+room            : ROOM IDENTIFIER LEFT_BRACE 'description:' STRING_LITERAL SEMICOLON (roomConnection)* (items)? RIGHT_BRACE;
 roomConnection  : IDENTIFIER COLON IDENTIFIER SEMICOLON;
 items           : 'items:' LEFT_BRACKET (IDENTIFIER (COMMA IDENTIFIER)*)? RIGHT_BRACKET;
-item            : ITEM IDENTIFIER LEFT_BRACE 'description:' STRING_LITERAL (action)? RIGHT_BRACE;
-action          : ACTION COLON IDENTIFIER (COMMA IDENTIFIER)* SEMICOLON;
-
+item            : ITEM IDENTIFIER LEFT_BRACE 'description:' STRING_LITERAL SEMICOLON (actions)? (secret_items)? RIGHT_BRACE;
+secret_items    : 'secret_items:' IDENTIFIER (COMMA IDENTIFIER)* SEMICOLON;
+actions         : 'actions:' IDENTIFIER (LEFT_PAREN IDENTIFIER RIGHT_PAREN)? (COMMA IDENTIFIER (LEFT_PAREN IDENTIFIER RIGHT_PAREN)?)* SEMICOLON;
+action          : ACTION IDENTIFIER LEFT_BRACE RIGHT_BRACE;
 
 
 

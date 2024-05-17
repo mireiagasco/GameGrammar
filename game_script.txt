@@ -1,32 +1,62 @@
 level start_level {
 
+    action pickup {}
+    action drop {}
+    action light {}
+    action read {}
+    action smell {}
+    action open {}
+
     item torch {
-        description: "An old torch. It emits a faint light"
-        action: pickup, light, drop;
+        description: "An old torch. It emits a faint light";
+        actions: pickup, light, drop;
     }
 
     item book {
-        description: "A dusty old book"
-        action: pickup, read, drop;
+        description: "A dusty old book";
+        actions: pickup, read, drop;
     }
 
     item flower {
-        description: "A beautiful flower"
-        action: pickup, smell, drop;
+        description: "A beautiful flower";
+        actions: pickup, smell, drop;
+    }
+
+    item coin {
+        description: "One coin";
+        actions: pickup, drop;
     }
 
     item old_box {
-        description: "An old wooden box covered in dust"
-        action: pickup, open, drop;
+        description: "An old wooden box covered in dust";
+        actions: open;
+        secret_items: coin;
+    }
+
+    item key {
+        description: "Key to open a closed box";
+        actions: pickup, drop;
+    }
+
+    item final_prize {
+        description: "A small bag with coins";
+        actions: pickup;
+    }
+
+    item mystery_box {
+        description: "A mysterious box that requires a key";
+        actions: open(key);
+        secret_items: final_prize;
     }
 
     room start_room {
-        description: "You are in a dimly lit room. There is a door to the north"
+        description: "You are in a dimly lit room. There is a door to the north";
         north: hallway;
+        east: nursery;
     }
 
     room hallway {
-        description: "You are in a narrow hallway"
+        description: "You are in a narrow hallway";
         south: start_room;
         east: library;
         west: garden;
@@ -34,14 +64,28 @@ level start_level {
     }
 
     room library {
-        description: "You have entered the library"
+        description: "You have entered the library";
         west: hallway;
-        items: [book]
+        south: nursery;
+        items: [book, key]
     }
 
     room garden {
-        description: "You find yourself in a peaceful garden"
+        description: "You find yourself in a peaceful garden";
         east: hallway;
-        items: [flower]
+        items: [flower, old_box]
+    }
+
+    room nursery {
+        description: "You have arrived at the nursery";
+        west: start_room;
+        east: treasure;
+        north: library;
+    }
+
+    room treasure {
+        description: "You have found the treasure room!";
+        west: nursery;
+        items: [mystery_box]
     }
 }

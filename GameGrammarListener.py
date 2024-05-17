@@ -62,6 +62,24 @@ class GameGrammarListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by GameGrammarParser#secret_items.
+    def enterSecret_items(self, ctx:GameGrammarParser.Secret_itemsContext):
+        pass
+
+    # Exit a parse tree produced by GameGrammarParser#secret_items.
+    def exitSecret_items(self, ctx:GameGrammarParser.Secret_itemsContext):
+        pass
+
+
+    # Enter a parse tree produced by GameGrammarParser#actions.
+    def enterActions(self, ctx:GameGrammarParser.ActionsContext):
+        pass
+
+    # Exit a parse tree produced by GameGrammarParser#actions.
+    def exitActions(self, ctx:GameGrammarParser.ActionsContext):
+        pass
+
+
     # Enter a parse tree produced by GameGrammarParser#action.
     def enterAction(self, ctx:GameGrammarParser.ActionContext):
         pass
