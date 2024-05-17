@@ -1,94 +1,47 @@
 level start_level {
 
     item torch {
-
-        description: "An old torch. It emits a faint light."
-        action pickup {
-            if ("player.hasItem(torch)")
-            {
-                print: "You already have a torch.";
-            }
-            else {
-                action addItem {
-                    print: "You picked up the torch.";
-                }
-            }
-        }
+        description: "An old torch. It emits a faint light"
+        action: pickup, light, drop;
     }
 
-
     item book {
-        description: "A dusty old book."
-        action pickup {
-            if ("player.hasItem(book)")
-            {
-                print: "You already have a book.";
-            }
-            else {
-                action addItem {
-                    print: "You picked up the book.";
-                }
-            }
-        }
+        description: "A dusty old book"
+        action: pickup, read, drop;
     }
 
     item flower {
-        description: "A beautiful flower."
-        action pickup {
-            if ("player.hasItem(flower)")
-            {
-                print: "You already have a flower.";
-            }
-            else {
-                action addItem {
-                    print: "You picked up the flower.";
-                }
-            }
-        }
+        description: "A beautiful flower"
+        action: pickup, smell, drop;
     }
 
     item old_box {
-        description: "An old wooden box covered in dust."
-        action pickup {
-            if ("player.hasItem(old_box)")
-            {
-                print: "You already have an old box.";
-            }
-            else {
-                action addItem {
-                    print: "You picked up the old box.";
-                }
-            }
-        }
+        description: "An old wooden box covered in dust"
+        action: pickup, open, drop;
     }
 
     room start_room {
-        description: "You are in a dimly lit room. There is a door to the north."
+        description: "You are in a dimly lit room. There is a door to the north"
         north: hallway;
     }
 
     room hallway {
-        description: "You are in a narrow hallway."
-        west: start_room;
+        description: "You are in a narrow hallway"
+        south: start_room;
         east: library;
+        west: garden;
         items: [torch]
     }
 
     room library {
-        description: "You have entered the library."
+        description: "You have entered the library"
         west: hallway;
         items: [book]
     }
 
     room garden {
-        description: "You find yourself in a peaceful garden."
-        south: hallway;
+        description: "You find yourself in a peaceful garden"
+        east: hallway;
         items: [flower]
-    }
-
-    room attic {
-        description: "You climb up to the attic. It's dusty and full of cobwebs."
-        down: hallway;
-        items: [old_box]
     }
 }

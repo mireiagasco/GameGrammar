@@ -29,11 +29,7 @@ room            : ROOM IDENTIFIER LEFT_BRACE 'description:' STRING_LITERAL (room
 roomConnection  : IDENTIFIER COLON IDENTIFIER SEMICOLON;
 items           : 'items:' LEFT_BRACKET (IDENTIFIER (COMMA IDENTIFIER)*)? RIGHT_BRACKET;
 item            : ITEM IDENTIFIER LEFT_BRACE 'description:' STRING_LITERAL (action)? RIGHT_BRACE;
-action          : ACTION IDENTIFIER ((LEFT_BRACE IF LEFT_PAREN condition RIGHT_PAREN block (ELSE block)? RIGHT_BRACE) | block)+;
-condition       : (STRING_LITERAL | IDENTIFIER);
-block           : LEFT_BRACE (printStatement | action)+ RIGHT_BRACE;
-printStatement  : PRINT COLON STRING_LITERAL SEMICOLON;
-
+action          : ACTION COLON IDENTIFIER (COMMA IDENTIFIER)* SEMICOLON;
 
 
 

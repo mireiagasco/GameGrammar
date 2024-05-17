@@ -71,30 +71,3 @@ class GameGrammarListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by GameGrammarParser#condition.
-    def enterCondition(self, ctx:GameGrammarParser.ConditionContext):
-        pass
-
-    # Exit a parse tree produced by GameGrammarParser#condition.
-    def exitCondition(self, ctx:GameGrammarParser.ConditionContext):
-        pass
-
-
-    # Enter a parse tree produced by GameGrammarParser#block.
-    def enterBlock(self, ctx:GameGrammarParser.BlockContext):
-        pass
-
-    # Exit a parse tree produced by GameGrammarParser#block.
-    def exitBlock(self, ctx:GameGrammarParser.BlockContext):
-        pass
-
-
-    # Enter a parse tree produced by GameGrammarParser#printStatement.
-    def enterPrintStatement(self, ctx:GameGrammarParser.PrintStatementContext):
-        pass
-
-    # Exit a parse tree produced by GameGrammarParser#printStatement.
-    def exitPrintStatement(self, ctx:GameGrammarParser.PrintStatementContext):
-        pass
-
-
