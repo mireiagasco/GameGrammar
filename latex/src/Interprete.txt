@@ -1,0 +1,205 @@
+import java.util.*;
+
+class NFA1 {
+    String startState;
+    Set<String> acceptingStates;
+    Map<String, Map<String, Set<String>>> transitions;
+    Set<String> alphabet;
+
+    public NFA1(String startState, Set<String> acceptingStates, Map<String, Map<String, Set<String>>> transitions, Set<String> alphabet) {
+        this.startState = startState;
+        this.acceptingStates = acceptingStates;
+        this.transitions = transitions;
+        this.alphabet = alphabet;
+    }
+}
+
+class DFA {
+    String startState;
+    Set<String> acceptingStates;
+    Map<String, Set<String>> transitions;
+    Set<String> states;
+
+    public DFA() {
+        this.startState = null;
+        this.acceptingStates = new HashSet<>();
+        this.transitions = new HashMap<>();
+        this.states = new HashSet<>();
+    }
+}
+
+public class Main2 {
+    public static Set<String> epsilonClosure(NFA1 nfa, Set<String> states) {
+        Stack<String> stack = new Stack<>();
+        Set<String> closure = new HashSet<>(states);
+        stack.addAll(states);
+
+        while (!stack.isEmpty()) {
+            String state = stack.pop();
+            Map<String, Set<String>> stateTransitions = nfa.transitions.getOrDefault(state, new HashMap<>());
+            if (stateTransitions.containsKey("")) {
+                Set<String> nextStates = stateTransitions.get("");
+                for (String nextState : nextStates) {
+                    if (!closure.contains(nextState)) {
+                        closure.add(nextState);
+                        stack.push(nextState);
+                    }
+                }
+            }
+        }
+
+        return closure;
+    }
+
+    public static Set<String> move(NFA1 nfa, Set<String> states, String symbol) {
+        Set<String> nextStates = new HashSet<>();
+        for (String state : states) {
+            Map<String, Set<String>> stateTransitions = nfa.transitions.getOrDefault(state, new HashMap<>());
+            if (stateTransitions.containsKey(symbol)) {
+                nextStates.addAll(stateTransitions.get(symbol));
+            }
+        }
+        return nextStates;
+    }
+// ({q0,q1}, {(q0,e,q1) , q0, q1})
+    public static DFA nfaToDfa(NFA1 nfa) {
+        DFA dfa = new DFA();
+        Set<String> startClosure = epsilonClosure(nfa, Collections.singleton(nfa.startState));
+        dfa.startState = startClosure.toString(); // Convert set to string
+        dfa.states.add(dfa.startState);
+        List<String> unprocessedStates = new ArrayList<>();
+        unprocessedStates.add(dfa.startState);
+        dfa.transitions.put(dfa.startState, (Set<String>) new HashMap<Object, Object>());
+
+        while (!unprocessedStates.isEmpty()) {
+            String currentDfaState = unprocessedStates.remove(unprocessedStates.size() - 1);
+            for (String symbol : nfa.alphabet) {
+                if (symbol.equals("")) {
+                    continue;
+                }
+                Set<String> nextNfaStates = move(nfa, new HashSet<>(Arrays.asList(currentDfaState.split(", "))), symbol);
+                Set<String> nextClosure = epsilonClosure(nfa, nextNfaStates);
+                String nextDfaState = nextClosure.toString(); // Convert set to string
+                if (nextDfaState.isEmpty()) {
+                    continue;
+                }
+                if (!dfa.states.contains(nextDfaState)) {
+                    dfa.states.add(nextDfaState);
+                    unprocessedStates.add(nextDfaState);
+                    dfa.transitions.put(nextDfaState, new HashMap<>());
+                }
+                dfa.transitions.get(currentDfaState).put(symbol, nextDfaState);
+
+                if (nextDfaState.contains("q_accept")) {
+                    dfa.acceptingStates.add(nextDfaState);
+                }
+            }
+        }
+        return dfa;
+    }
+
+    public static String dfaToLatex(DFA dfa) {
+        StringBuilder latexCode = new StringBuilder("\\documentclass{article}\n\\usepackage{tikz}\n\\usetikzlibrary{automata, positioning}\n\n\\begin{document}\n\n");
+        latexCode.append("\\begin{tikzpicture}[shorten >=1pt, node distance=3cm, on grid, auto]\n");
+
+        Map<String, String> statePositions = new HashMap<>();
+        int i = 0;
+        for (String state : dfa.states) {
+            int x = 3 * (i % 5);
+            int y = -3 * (i / 5);
+            statePositions.put(state, "(" + x + "," + y + ")");
+            if (state.equals(dfa.startState)) {
+                latexCode.append("    \\node[state, initial] (").append(state).append(") at ").append(statePositions.get(state)).append(" {").append(state).append("};\n");
+            } else if (dfa.acceptingStates.contains(state)) {
+                latexCode.append("    \\node[state, accepting] (").append(state).append(") at ").append(statePositions.get(state)).append(" {").append(state).append("};\n");
+            } else {
+                latexCode.append("    \\node[state] (").append(state).append(") at ").append(statePositions.get(state)).append(" {").append(state).append("};\n");
+            }
+            i++;
+        }
+
+        for (Map.Entry<String, Set<String>> entry : dfa.transitions.entrySet()) {
+            String currentState = entry.getKey();
+            Map<String, Set<String>> transitions = entry.getValue();
+            for (Map.Entry<String, Set<String>> transition : transitions.entrySet()) {
+                String symbol = transition.getKey();
+                Set<String> nextStates = transition.getValue();
+                for (String nextState : nextStates) {
+                    latexCode.append("    \\path[->] (").append(currentState).append(") edge node {").append(symbol).append("} (").append(nextState).append(");\n");
+                }
+            }
+        }
+
+        latexCode.append("\\end{tikzpicture}\n\n\\end{document}");
+        return latexCode.toString();
+    }
+
+    public static void main(String[] args) {
+        NFA1 nfa = new NFA1(
+                "q0",
+                new HashSet<>(Collections.singletonList("q_accept")),
+                new HashMap<String, Map<String, Set<String>>>() {{
+                    put("q0", new HashMap<String, Set<String>>() {{
+                        put("LEVEL", new HashSet<>(Collections.singletonList("q1")));
+                    }});
+                    put("q1", new HashMap<String, Set<String>>() {{
+                        put("IDENTIFIER", new HashSet<>(Collections.singletonList("q2")));
+                    }});
+                    put("q2", new HashMap<String, Set<String>>() {{
+                        put("LEFT_BRACE", new HashSet<>(Collections.singletonList("q3")));
+                    }});
+                    put("q3", new HashMap<String, Set<String>>() {{
+                        put("ROOM", new HashSet<>(Collections.singletonList("q4")));
+                        put("ITEM", new HashSet<>(Collections.singletonList("q5")));
+                        put("ACTION", new HashSet<>(Collections.singletonList("q6")));
+                        put("RIGHT_BRACE", new HashSet<>(Collections.singletonList("q_accept")));
+                    }});
+                    put("q4", new HashMap<String, Set<String>>() {{
+                        put("IDENTIFIER", new HashSet<>(Collections.singletonList("q7")));
+                    }});
+                    put("q7", new HashMap<String, Set<String>>() {{
+                        put("LEFT_BRACE", new HashSet<>(Collections.singletonList("q8")));
+                    }});
+                    put("q8", new HashMap<String, Set<String>>() {{
+                        put("description:", new HashSet<>(Collections.singletonList("q9")));
+                    }});
+                    put("q9", new HashMap<String, Set<String>>() {{
+                        put("STRING_LITERAL", new HashSet<>(Collections.singletonList("q10")));
+                    }});
+                    put("q10", new HashMap<String, Set<String>>() {{
+                        put("SEMICOLON", new HashSet<>(Collections.singletonList("q3")));
+                    }});
+                    put("q5", new HashMap<String, Set<String>>() {{
+                        put("IDENTIFIER", new HashSet<>(Collections.singletonList("q11")));
+                    }});
+                    put("q11", new HashMap<String, Set<String>>() {{
+                        put("LEFT_BRACE", new HashSet<>(Collections.singletonList("q12")));
+                    }});
+                    put("q12", new HashMap<String, Set<String>>() {{
+                        put("description:", new HashSet<>(Collections.singletonList("q13")));
+                    }});
+                    put("q13", new HashMap<String, Set<String>>() {{
+                        put("STRING_LITERAL", new HashSet<>(Collections.singletonList("q14")));
+                    }});
+                    put("q14", new HashMap<String, Set<String>>() {{
+                        put("SEMICOLON", new HashSet<>(Collections.singletonList("q3")));
+                    }});
+                    put("q6", new HashMap<String, Set<String>>() {{
+                        put("IDENTIFIER", new HashSet<>(Collections.singletonList("q15")));
+                    }});
+                    put("q15", new HashMap<String, Set<String>>() {{
+                        put("LEFT_BRACE", new HashSet<>(Collections.singletonList("q16")));
+                    }});
+                    put("q16", new HashMap<String, Set<String>>() {{
+                        put("RIGHT_BRACE", new HashSet<>(Collections.singletonList("q3")));
+                    }});
+                }},
+                new HashSet<>(Arrays.asList("LEVEL", "ROOM", "ITEM", "ACTION", "IDENTIFIER", "LEFT_BRACE", "description:", "STRING_LITERAL", "SEMICOLON", "RIGHT_BRACE"))
+        );
+
+        DFA dfa = nfaToDfa(nfa);
+        String latexCode = dfaToLatex(dfa);
+        System.out.println(latexCode);
+    }
+}
+
