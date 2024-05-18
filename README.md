@@ -9,7 +9,7 @@ To properly execute this project it is required that ANTLR version 4.7.2 for pyt
 
 ``` pip install antlr4-python3-runtime==4.7.2 ```
 
-Moreover, in case you want to regenerate the lexer, listener and parser for the grammar, you will need to execute the folowing command:
+Moreover, in case you want to regenerate the lexer, listener and parser for the grammar, you will need to execute the following command:
 
 ``` antlr4 -Dlanguage=Python3 GameGrammar.g4 ```
 
@@ -63,14 +63,20 @@ The actions are the most simple feature to be defined, as they only need to be d
 The interpreter considers three important actions: ```pickup```, ```open``` and ```interact```.  The first one adds the item to the player's inventory, while open and interact both check if the player has the 
 ```required_item``` in its inventory and, if so, adds the ```secret_item```.
 
-
-
 ## Interpreter Description
+The interpreter does two main things: check the script's grammar and generating the game execution.  First it ensures that the provided ```.txt``` file is correctly written in the GameGrammar. 
+This is done using the parser provided by antlr, with the commands explained earlier.
+In case there are errors with the grammar, the interpreter will detect them using the ```GrammarError``` and its listener, and will inform the user, ending execution smoothly.
+If the script is correct, then it will proceed with the execution.  The first thing to be done is load all information from the script into the GameVisualization structures.  This includes a list of ```actions```, ```items``` and ```romms```.
+For each of them, the required information will also be stored (for instance, the descriptions, related items, etc).
+In this step, validation of all the identifiers is carried out, checking if all of them are declared. This is to avoid, for example, an item being placed in a room, but never being declared.
+Once all information is correctly loaded, the interpreter executes the game_loop() function, that draws the map, placing all the rooms in the correct position, as well as the items and the player, indicated as an X.
+It also shows a menu with the possible options, that will vary depending on the room, its connections to other rooms, the items contained, etc.
 It is important to note that the interpreter requires a ```start_room``` and a ```final_prize``` to be able to generate the game execution. 
 The ```start_room``` is required because it will be the room where the player will be placed at the beggining of the game, and the ```final_prize``` is the item that makes the player win the game upon obtention.
 
 ## Execution Example
-Here you can check the starting configuration generated with the ```game_script_v2.txt```, which can be found in the ```GameScripts``` folder:
+Here you can check the starting configuration generated with the ```castle.txt```, which can be found in the ```GameScripts``` folder:
 ```
 /------------------------ Game map ---------------------------\
 |---------|   |---------|   |---------|   |---------|   
