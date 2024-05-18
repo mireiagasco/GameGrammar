@@ -1,0 +1,32 @@
+level small_house {
+
+    action pickup {}
+
+    item final_prize {
+        description: "A treasure";
+        actions: pickup;
+    }
+
+    room start_room {
+        description: "The house's hall";
+        north: living_room;
+        east: bedroom;
+        west: kitchen;
+    }
+
+    room living_room {
+        description: "The living room";
+        south: start_room;
+        items: [final_prize]
+    }
+
+    room bedroom {
+        description: "The bedroom";
+        west: start_room;
+    }
+
+    room kitchen {
+        description: "The kitchen";
+        east: start_room;
+    }
+}
