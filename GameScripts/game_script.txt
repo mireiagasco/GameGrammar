@@ -50,7 +50,7 @@ level start_level {
     }
 
     room start_room {
-        description: "You are in a dimly lit room. There is a door to the north";
+        description: "You are in a dimly lit room. There is a door to the north and another to the east";
         north: hallway;
         east: nursery;
     }

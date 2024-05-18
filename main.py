@@ -44,6 +44,13 @@ class GameVisualization(GameGrammarListener):
     def __init__(self, gameboard):
         self.symbol_table = SymbolTable()
         self.rooms, self.items = self.readmap(gameboard)
+
+        # Check for start_room and final_prize
+        if 'start_room' not in self.rooms:
+            raise IdentifierError("start_room is not defined, the game cannot start without it")
+        if 'final_prize' not in self.items:
+            raise IdentifierError("final_prize is not defined, the game cannot start without it")
+
         self.current_room = self.rooms['start_room']
         self.player_items = []
 
@@ -165,6 +172,10 @@ class GameVisualization(GameGrammarListener):
         for row in map_grid:
             print(''.join(row))
 
+        # Show the description of the current room
+        print(self.current_room['description'][:-1])
+        print("\n")
+
     def _place_room(self, room, x, y, positions, visited):
         if room['name'] in visited:
             return
@@ -227,6 +238,7 @@ class GameVisualization(GameGrammarListener):
         item = self.items[item_name]
         actions = item['actions']
         print(f"-------------- Inspect Item: {item_name} -------------")
+        print(f"Description: {item['description'][:-1]}")
         options = []
 
         for action in actions:
@@ -234,6 +246,8 @@ class GameVisualization(GameGrammarListener):
                 options.append(('Pick up', 'pickup'))
             elif action['name'] == 'open':
                 options.append(('Open', 'open'))
+            elif action['name'] == 'interact':
+                options.append(('Interact', 'interact'))
 
         options.append(('Go back', 'back'))
 
@@ -266,6 +280,18 @@ class GameVisualization(GameGrammarListener):
                     print(f"You need the {required_item[0]} to open this.")
                 else:
                     print(f"You opened the {item_name}.")
+            elif action == 'interact':
+                required_item = None
+                for action in self.items[item_name]['actions']:
+                    if action['name'] == 'interact' and 'required_item' in action:
+                        required_item = action['required_item']
+                if required_item is None or required_item in self.player_items:
+                    self.player_items.extend(item['secret_items'])
+                    print(f"You interacted with the {item_name} and obtained {item['secret_items']}.")
+                elif required_item:
+                    print(f"You need the {required_item} to interact with this.")
+                else:
+                    print(f"You interacted with the {item_name}.")
 
     def game_loop(self):
         while True:
@@ -301,20 +327,23 @@ class GameVisualization(GameGrammarListener):
             for idx in range(len(options)):
                 print(f"{idx + 1}. {options[idx][0]}")
 
-            choice = int(input("Enter your choice: ")) - 1
+            try:
+                choice = int(input("Enter your choice: ")) - 1
 
-            if choice == len(options) - 1:
-                print("Game ended.")
-                break
-            elif (num_connections - 1) < choice <= (num_connections + len(room_items) - 1):
-                selected_item = room_items[choice - num_connections]
-                self._show_item_menu(item_name=selected_item, room=current_room)
-            else:
-                action = options[choice][1]
-                if isinstance(action, str) and action == 'show_items':
-                    print("Player items:", ', '.join(self.player_items))
+                if choice == len(options) - 1:
+                    print("Game ended.")
+                    break
+                elif (num_connections - 1) < choice <= (num_connections + len(room_items) - 1):
+                    selected_item = room_items[choice - num_connections]
+                    self._show_item_menu(item_name=selected_item, room=current_room)
                 else:
-                    self.current_room = self.rooms[action]
+                    action = options[choice][1]
+                    if isinstance(action, str) and action == 'show_items':
+                        print("Player items:", ', '.join(self.player_items))
+                    else:
+                        self.current_room = self.rooms[action]
+            except (IndexError, ValueError):
+                    print("Invalid option")
 
             # Check if player has final_prize
             if 'final_prize' in self.player_items:

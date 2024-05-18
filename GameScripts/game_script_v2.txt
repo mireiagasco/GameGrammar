@@ -1,0 +1,90 @@
+level castle {
+
+    action pickup {}
+    action interact {}
+
+    item old_sword {
+        description: "A rusty sword";
+        actions: pickup;
+    }
+
+    item emblem {
+        description: "An old emblem";
+        actions: pickup;
+    }
+
+    item books {
+        description: "Some books";
+        actions: pickup;
+    }
+
+    item shield {
+        description: "An enormous dusty shield";
+        actions: pickup;
+    }
+
+    item final_prize {
+        description: "A small bag with coins";
+        actions: pickup;
+    }
+
+    item old_armour {
+        description: "An old armour that has no emblem";
+        actions: interact(emblem);
+        secret_items: final_prize;
+    }
+
+    room start_room {
+        description: "You have an enormous old castle in front of you";
+        north: main_hall;
+    }
+
+    room main_hall {
+        description: "You entered the main hall";
+        north: broken_staircase;
+        east: ceremony_room;
+        west: reception;
+        south: start_room;
+    }
+
+    room broken_staircase {
+        description: "You find an old staircase. It is unusable.";
+        south: main_hall;
+        west: library;
+        east: armory;
+        items: [old_sword]
+    }
+
+    room ceremony_room {
+        description: "You are in an enormous ceremony room";
+        west: main_hall;
+        north: armory;
+        items: [emblem]
+    }
+
+    room reception {
+        description: "You enter the reception room";
+        east: main_hall;
+    }
+
+    room library {
+        description: "You found an old library";
+        east: broken_staircase;
+        items: [books]
+    }
+
+    room armory {
+        description: "You enter the armory";
+        south: ceremony_room;
+        west: broken_staircase;
+        east: exhibition_room;
+        items: [shield]
+    }
+
+    room exhibition_room {
+        description: "You enter a room with a big armor";
+        west: armory;
+        items: [old_armour]
+    }
+
+}
