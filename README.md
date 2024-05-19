@@ -73,7 +73,7 @@ In this step, validation of all the identifiers is carried out, checking if all 
 Once all information is correctly loaded, the interpreter executes the game_loop() function, that draws the map, placing all the rooms in the correct position, as well as the items and the player, indicated as an X.
 It also shows a menu with the possible options, that will vary depending on the room, its connections to other rooms, the items contained, etc.
 It is important to note that the interpreter requires a ```start_room``` and a ```final_prize``` to be able to generate the game execution. 
-The ```start_room``` is required because it will be the room where the player will be placed at the beggining of the game, and the ```final_prize``` is the item that makes the player win the game upon obtention.
+The ```start_room``` is required because it will be the room where the player will be placed at the beginning of the game, and the ```final_prize``` is the item that makes the player win the game upon obtention.
 
 ## Execution Example
 Here you can check the starting configuration generated with the ```castle.txt```, which can be found in the ```GameScripts``` folder:
