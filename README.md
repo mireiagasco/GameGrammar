@@ -67,7 +67,7 @@ The interpreter considers three important actions: ```pickup```, ```open``` and 
 The interpreter does two main things: check the script's grammar and generating the game execution.  First it ensures that the provided ```.txt``` file is correctly written in the GameGrammar. 
 This is done using the parser provided by antlr, with the commands explained earlier.
 In case there are errors with the grammar, the interpreter will detect them using the ```GrammarError``` and its listener, and will inform the user, ending execution smoothly.
-If the script is correct, then it will proceed with the execution.  The first thing to be done is load all information from the script into the GameVisualization structures.  This includes a list of ```actions```, ```items``` and ```romms```.
+If the script is correct, then it will proceed with the execution.  The first thing to be done is load all information from the script into the GameVisualization structures.  This includes a list of ```actions```, ```items``` and ```rooms```.
 For each of them, the required information will also be stored (for instance, the descriptions, related items, etc).
 In this step, validation of all the identifiers is carried out, checking if all of them are declared. This is to avoid, for example, an item being placed in a room, but never being declared.
 Once all information is correctly loaded, the interpreter executes the game_loop() function, that draws the map, placing all the rooms in the correct position, as well as the items and the player, indicated as an X.
