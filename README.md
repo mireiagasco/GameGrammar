@@ -378,7 +378,5 @@ You interacted with the old_armour and obtained ['final_prize'].
 ```
 You are able to interact because you have the ```emblem```, therefore you obtain the ```final_prize``` and win the game.
 
-## LaTeX
-
-
 ## Team Contribution
+Grammar definition and original idea from  Mireia Gasco Agorreta, Katherin Denis Martin Cipriano and Elisabet Pujol Ventosa.  Scripts and interpreter by Mireia Gasco.
